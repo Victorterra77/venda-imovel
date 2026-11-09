@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Imóvel à Venda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&display=swap">
+<style>
+html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+/* Layout: foto da fachada como capa, faixa de dados, galeria por ambiente em grade, visualizador em tela cheia */
+:root {
+  --bg: #f3f5f8;
+  --surface: #ffffff;
+  --ink: #14202e;
+  --muted: #5b6878;
+  --line: #dde3ea;
+  --accent: #1f5fae;      /* azul da fachada */
+  --accent-ink: #ffffff;
+  --chip: #e6eef8;
+  --shade: rgba(10, 18, 28, .94);
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Figtree", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1620; --surface: #17212d; --ink: #e8eef5; --muted: #9aa8b8;
+    --line: #263443; --accent: #5b9be6; --accent-ink: #08121e; --chip: #1c2c40;
+    --shade: rgba(4, 8, 14, .96); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1620; --surface: #17212d; --ink: #e8eef5; --muted: #9aa8b8;
+  --line: #263443; --accent: #5b9be6; --accent-ink: #08121e; --chip: #1c2c40;
+  --shade: rgba(4, 8, 14, .96); color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.55;
+}
+.wrap {
+  max-width: 1080px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* Capa */
+.hero { position: relative; margin-top: 16px; border-radius: 18px; overflow: hidden; background: var(--line); }
+.hero img { display: block; width: 100%; height: min(62vh, 560px); object-fit: cover; object-position: center 40%; }
+.hero button { all: unset; display: block; cursor: zoom-in; }
+.hero button:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
+.tag {
+  position: absolute; left: 14px; top: 14px;
+  background: var(--accent); color: var(--accent-ink);
+  font-weight: 600; font-size: 13px; letter-spacing: .06em; text-transform: uppercase;
+  padding: 6px 12px; border-radius: 999px;
+}
+header.intro { display: grid; gap: 10px; padding-block: 22px 8px; }
+h1 {
+  font-family: var(--font-display); font-weight: 800; font-size: clamp(30px, 6vw, 48px);
+  line-height: 1.05; letter-spacing: -.02em; margin: 0; text-wrap: balance;
+}
+.lede { margin: 0; color: var(--muted); max-width: 60ch; font-size: 17px; }
+
+/* Faixa de dados */
+.facts {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1px; background: var(--line); border: 1px solid var(--line);
+  border-radius: 14px; overflow: hidden; margin-block: 18px 8px;
+}
+.fact { background: var(--surface); padding: 14px 16px; display: grid; gap: 2px; min-width: 0; }
+.fact span { font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+.fact strong { font-family: var(--font-display); font-weight: 600; font-size: 20px; font-variant-numeric: tabular-nums; }
+.fact .tbd { color: var(--muted); font-weight: 600; }
+
+/* Navegação por ambiente */
+nav.rooms {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--bg); padding-block: 12px;
+  display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+nav.rooms::-webkit-scrollbar { display: none; }
+nav.rooms a {
+  flex: none; text-decoration: none; color: var(--ink); background: var(--chip);
+  padding: 8px 14px; border-radius: 999px; font-weight: 500; font-size: 15px; white-space: nowrap;
+}
+nav.rooms a small { color: var(--muted); font-variant-numeric: tabular-nums; margin-left: 4px; }
+nav.rooms a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+section.room { padding-block: 22px 6px; scroll-margin-top: 64px; }
+section.room h2 {
+  font-family: var(--font-display); font-weight: 600; font-size: 22px; margin: 0 0 4px;
+  display: flex; align-items: baseline; gap: 10px;
+}
+section.room h2 small { font-family: var(--font-body); font-weight: 500; font-size: 14px; color: var(--muted); }
+section.room p { margin: 0 0 14px; color: var(--muted); font-size: 15px; }
+
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+@media (min-width: 640px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 10px; } }
+@media (min-width: 960px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+.grid button {
+  all: unset; cursor: zoom-in; display: block; border-radius: 10px; overflow: hidden;
+  background: var(--line); aspect-ratio: 3 / 4; max-width: 100%;
+}
+.grid button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.grid img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .25s ease; }
+@media (hover: hover) { .grid button:hover img { transform: scale(1.03); } }
+
+/* Contato */
+.contact {
+  margin-block: 32px 40px; background: var(--accent); color: var(--accent-ink);
+  border-radius: 18px; padding: 22px 20px; display: grid; gap: 8px;
+}
+.contact h2 { font-family: var(--font-display); font-weight: 800; font-size: 26px; margin: 0; line-height: 1.1; }
+.contact p { margin: 0; opacity: .9; max-width: 55ch; }
+.note { font-size: 13px; color: var(--muted); text-align: center; padding-bottom: 28px; }
+
+/* Visualizador */
+.viewer {
+  position: fixed; inset: 0; z-index: 50; background: var(--shade);
+  display: grid; grid-template-rows: auto 1fr auto;
+  padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+  color: #fff; touch-action: pan-y;
+}
+.viewer .bar { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; gap: 12px; }
+.viewer .count { font-variant-numeric: tabular-nums; font-size: 15px; opacity: .85; min-width: 0; }
+.viewer .stage { display: grid; place-items: center; min-height: 0; padding: 0 8px; position: relative; }
+.viewer .stage img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 6px; user-select: none; -webkit-user-drag: none; }
+.viewer .nav { display: flex; justify-content: center; gap: 14px; padding: 12px 14px 16px; }
+.vbtn {
+  all: unset; cursor: pointer; width: 48px; height: 48px; border-radius: 999px;
+  display: grid; place-items: center; background: rgba(255,255,255,.14); font-size: 22px; line-height: 1;
+}
+.vbtn:hover { background: rgba(255,255,255,.24); }
+.vbtn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .grid img { transition: none; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="hero">
+    <button type="button" data-open="0" aria-label="Ver foto da fachada em tela cheia">
+      <img src="01.jpg" alt="Fachada azul do imóvel com portão branco e janelas em vidro no pavimento superior">
+    </button>
+    <span class="tag">À venda</span>
+  </div>
+
+  <header class="intro">
+    <h1>Imóvel com galpão e pavimento superior</h1>
+    <p class="lede">Galpão amplo de pé-direito alto, frente com vitrine em vidro e pavimento superior com salão, cozinha e vários quartos, todos com piso porcelanato. Toque em qualquer foto para ampliar.</p>
+  </header>
+
+  <div class="facts" aria-label="Dados do imóvel">
+    <div class="fact"><span>Valor</span><strong class="tbd">A informar</strong></div>
+    <div class="fact"><span>Área</span><strong class="tbd">A informar</strong></div>
+    <div class="fact"><span>Localização</span><strong class="tbd">A informar</strong></div>
+    <div class="fact"><span>Fotos</span><strong id="total">28</strong></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <nav class="rooms" id="rooms" aria-label="Ambientes"></nav>
+  <main id="gallery"></main>
+
+  <div class="contact">
+    <h2>Gostou do imóvel?</h2>
+    <p>Entre em contato para agendar uma visita. Telefone e WhatsApp serão informados aqui.</p>
+  </div>
+  <p class="note">Página de teste. Valores e contato ainda serão incluídos.</p>
+</div>
+
+<div class="viewer" id="viewer" hidden role="dialog" aria-modal="true" aria-label="Visualizador de fotos">
+  <div class="bar">
+    <span class="count" id="vcount"></span>
+    <button class="vbtn" type="button" id="vclose" aria-label="Fechar">✕</button>
+  </div>
+  <div class="stage" id="vstage"><img id="vimg" alt=""></div>
+  <div class="nav">
+    <button class="vbtn" type="button" id="vprev" aria-label="Foto anterior">‹</button>
+    <button class="vbtn" type="button" id="vnext" aria-label="Próxima foto">›</button>
+  </div>
+</div>
+
+<script>
+const sections = [
+  { id: "fachada", name: "Fachada", desc: "Prédio de dois pavimentos, portão amplo e janelas em vidro na frente.", from: 1, to: 3 },
+  { id: "galpao", name: "Galpão", desc: "Área livre com pé-direito alto, iluminação natural, frente em vidro e banheiro.", from: 4, to: 8 },
+  { id: "superior", name: "Pavimento superior", desc: "Salão com janelas amplas, cozinha com bancada, quartos e banheiro.", from: 9, to: 23 },
+  { id: "outros", name: "Outros ambientes", desc: "Cozinha com fogão embutido, banheiro com cuba de vidro e cômodos de apoio.", from: 24, to: 28 }
+];
+const photos = [];
+const pad = n => String(n).padStart(2, "0");
+const nav = document.getElementById("rooms");
+const gallery = document.getElementById("gallery");
+
+sections.forEach(s => {
+  const count = s.to - s.from + 1;
+  const link = document.createElement("a");
+  link.href = "#" + s.id;
+  link.innerHTML = `${s.name}<small>${count}</small>`;
+  nav.appendChild(link);
+
+  const sec = document.createElement("section");
+  sec.className = "room"; sec.id = s.id;
+  sec.innerHTML = `<h2>${s.name} <small>${count} fotos</small></h2><p>${s.desc}</p>`;
+  const grid = document.createElement("div"); grid.className = "grid";
+  for (let n = s.from; n <= s.to; n++) {
+    const idx = photos.length;
+    photos.push({ src: `${pad(n)}.jpg`, label: s.name });
+    const b = document.createElement("button");
+    b.type = "button"; b.dataset.open = idx;
+    b.setAttribute("aria-label", `${s.name}, foto ${n - s.from + 1} de ${count}`);
+    b.innerHTML = `<img src="${pad(n)}.jpg" alt="${s.name}" loading="${n <= 6 ? "eager" : "lazy"}" decoding="async">`;
+    grid.appendChild(b);
+  }
+  sec.appendChild(grid);
+  gallery.appendChild(sec);
+});
+document.getElementById("total").textContent = photos.length;
+
+const viewer = document.getElementById("viewer");
+const vimg = document.getElementById("vimg");
+const vcount = document.getElementById("vcount");
+let cur = 0, lastFocus = null;
+
+function show(i) {
+  cur = (i + photos.length) % photos.length;
+  vimg.src = photos[cur].src;
+  vimg.alt = photos[cur].label;
+  vcount.textContent = `${photos[cur].label} · ${cur + 1} de ${photos.length}`;
+  [cur + 1, cur - 1].forEach(k => { const p = photos[(k + photos.length) % photos.length]; new Image().src = p.src; });
+}
+function openViewer(i) {
+  lastFocus = document.activeElement;
+  viewer.hidden = false; document.body.style.overflow = "hidden";
+  show(i); document.getElementById("vclose").focus();
+}
+function closeViewer() {
+  viewer.hidden = true; document.body.style.overflow = "";
+  if (lastFocus) lastFocus.focus();
+}
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-open]");
+  if (t) openViewer(Number(t.dataset.open));
+});
+document.getElementById("vclose").onclick = closeViewer;
+document.getElementById("vprev").onclick = () => show(cur - 1);
+document.getElementById("vnext").onclick = () => show(cur + 1);
+document.getElementById("vstage").addEventListener("click", e => { if (e.target.id === "vstage") closeViewer(); });
+document.addEventListener("keydown", e => {
+  if (viewer.hidden) return;
+  if (e.key === "Escape") closeViewer();
+  if (e.key === "ArrowRight") show(cur + 1);
+  if (e.key === "ArrowLeft") show(cur - 1);
+});
+let x0 = null;
+viewer.addEventListener("touchstart", e => { x0 = e.touches[0].clientX; }, { passive: true });
+viewer.addEventListener("touchend", e => {
+  if (x0 === null) return;
+  const dx = e.changedTouches[0].clientX - x0;
+  if (Math.abs(dx) > 45) show(cur + (dx < 0 ? 1 : -1));
+  x0 = null;
+});
+</script>
+</body>
+</html>
