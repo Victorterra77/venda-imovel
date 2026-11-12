@@ -259,7 +259,7 @@ section.room p { margin: 0 0 14px; color: var(--muted); font-size: 15px; }
 
 <script>
 const sections = [
-  { id: "fachada", name: "Fachada do galpão", desc: "Galpão com duas lajes e fachada pele de vidro.", from: 1, to: 3 },
+  { id: "fachada", name: "Fachada do galpão", desc: "Galpão com duas lajes e fachada pele de vidro.", list: [1, 2, 3, 29, 30, 31] },
   { id: "galpao", name: "Galpão", desc: "Recém-reformado, com iluminação natural, forro em PVC e paredes na cor branca.", from: 4, to: 8 },
   { id: "inferior", name: "Piso inferior", desc: "Conta com 3 cômodos/quartos, 1 cozinha e 1 banheiro, tudo com forro PVC.", from: 24, to: 28 },
   { id: "superior", name: "Piso superior", desc: "Conta com 4 quartos, 1 sala grande, 1 cozinha e 1 banheiro. Todo em porcelanato e com portas e janelas de alumínio.", from: 9, to: 23 }
@@ -270,7 +270,8 @@ const nav = document.getElementById("rooms");
 const gallery = document.getElementById("gallery");
 
 sections.forEach(s => {
-  const count = s.to - s.from + 1;
+  const nums = s.list || Array.from({ length: s.to - s.from + 1 }, (_, k) => s.from + k);
+  const count = nums.length;
   const link = document.createElement("a");
   link.href = "#" + s.id;
   link.innerHTML = `${s.name}<small>${count}</small>`;
@@ -280,15 +281,15 @@ sections.forEach(s => {
   sec.className = "room"; sec.id = s.id;
   sec.innerHTML = `<h2>${s.name} <small>${count} fotos</small></h2><p>${s.desc}</p>`;
   const grid = document.createElement("div"); grid.className = "grid";
-  for (let n = s.from; n <= s.to; n++) {
+  nums.forEach((n, k) => {
     const idx = photos.length;
     photos.push({ src: `${pad(n)}.jpg`, label: s.name });
     const b = document.createElement("button");
     b.type = "button"; b.dataset.open = idx;
-    b.setAttribute("aria-label", `${s.name}, foto ${n - s.from + 1} de ${count}`);
+    b.setAttribute("aria-label", `${s.name}, foto ${k + 1} de ${count}`);
     b.innerHTML = `<img src="${pad(n)}.jpg" alt="${s.name}" loading="${idx < 8 ? "eager" : "lazy"}" decoding="async">`;
     grid.appendChild(b);
-  }
+  });
   sec.appendChild(grid);
   gallery.appendChild(sec);
 });
