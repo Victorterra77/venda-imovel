@@ -3,7 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Imóvel à Venda</title>
+<title>Galpão e Sobrado à Venda</title>
+<meta name="description" content="Galpão de 360 m² e sobrado superior de 120 m² no Setor Pontakayana, Trindade-GO. R$ 950.000,00, aceitamos propostas.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Galpão de 360 m² e Sobrado Superior de 120 m²">
+<meta property="og:description" content="Setor Pontakayana, Trindade-GO. R$ 950.000,00, aceitamos propostas. Veja as fotos e agende uma visita.">
+<meta property="og:image" content="https://victorterra77.github.io/venda-imovel/01.jpg">
+<meta property="og:url" content="https://victorterra77.github.io/venda-imovel/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&display=swap">
@@ -116,7 +122,33 @@ section.room p { margin: 0 0 14px; color: var(--muted); font-size: 15px; }
 }
 .contact h2 { font-family: var(--font-display); font-weight: 800; font-size: 26px; margin: 0; line-height: 1.1; }
 .contact p { margin: 0; opacity: .9; max-width: 55ch; }
-.note { font-size: 13px; color: var(--muted); text-align: center; padding-bottom: 28px; }
+.contact .name { font-weight: 600; opacity: 1; margin-top: 6px; }
+.phones { display: grid; gap: 10px; margin-top: 4px; }
+.phone {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px;
+  background: rgba(255,255,255,.12); border-radius: 12px; padding: 12px 14px;
+}
+.phone .num { font-family: var(--font-display); font-weight: 600; font-size: 21px; font-variant-numeric: tabular-nums; flex: 1 1 auto; user-select: all; }
+.phone .acts { display: flex; gap: 8px; flex-wrap: wrap; }
+.phone a {
+  text-decoration: none; font-weight: 600; font-size: 15px; padding: 9px 14px; border-radius: 999px;
+  background: var(--accent-ink); color: var(--accent);
+}
+.phone a.call { background: transparent; color: var(--accent-ink); box-shadow: inset 0 0 0 1.5px currentColor; }
+.phone a:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+.price-note { display: block; font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--accent); margin-top: 2px; }
+
+/* Descrição */
+.about { display: grid; gap: 14px; margin-block: 18px 4px; }
+.about h2 { font-family: var(--font-display); font-weight: 600; font-size: 22px; margin: 0; }
+.highlights { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.highlights li { padding-left: 22px; position: relative; max-width: 65ch; }
+.highlights li::before { content: ""; position: absolute; left: 4px; top: .62em; width: 8px; height: 8px; border-radius: 2px; background: var(--accent); }
+.floors { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.floor { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; min-width: 0; }
+.floor h3 { margin: 0 0 6px; font-size: 13px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); font-weight: 600; }
+.floor ul { margin: 0; padding-left: 18px; display: grid; gap: 2px; }
+.cta-line { margin: 0; font-weight: 600; }
 
 /* Visualizador */
 .viewer {
@@ -150,27 +182,67 @@ section.room p { margin: 0 0 14px; color: var(--muted); font-size: 15px; }
   </div>
 
   <header class="intro">
-    <h1>Imóvel com galpão e pavimento superior</h1>
-    <p class="lede">Galpão amplo de pé-direito alto, frente com vitrine em vidro e pavimento superior com salão, cozinha e vários quartos, todos com piso porcelanato. Toque em qualquer foto para ampliar.</p>
+    <h1>Galpão de 360 m² e Sobrado Superior de 120 m²</h1>
+    <p class="lede">Galpão com fachada pele de vidro Atlanta e sobrado superior, no Setor Pontakayana, em Trindade-GO. Recém-reformado, com paredes pintadas de branco.</p>
   </header>
 
   <div class="facts" aria-label="Dados do imóvel">
-    <div class="fact"><span>Valor</span><strong class="tbd">A informar</strong></div>
-    <div class="fact"><span>Área</span><strong class="tbd">A informar</strong></div>
-    <div class="fact"><span>Localização</span><strong class="tbd">A informar</strong></div>
-    <div class="fact"><span>Fotos</span><strong id="total">28</strong></div>
+    <div class="fact"><span>Valor</span><strong>R$ 950.000,00<small class="price-note">Aceitamos propostas</small></strong></div>
+    <div class="fact"><span>Galpão</span><strong>360 m²</strong></div>
+    <div class="fact"><span>Sobrado superior</span><strong>120 m²</strong></div>
+    <div class="fact"><span>Localização</span><strong>Setor Pontakayana, Trindade-GO</strong></div>
   </div>
+
+  <section class="about" aria-labelledby="sobre">
+    <h2 id="sobre">Sobre o imóvel</h2>
+    <ul class="highlights">
+      <li>Galpão com fachada pele de vidro Atlanta</li>
+      <li>Energia trifásica no galpão</li>
+      <li>Forro PVC novo</li>
+      <li>Paredes pintadas de branco, recém-reformado</li>
+      <li>Piso em porcelanato em todos os cômodos</li>
+      <li>Todas as portas e janelas sob medida em esquadrias de alumínio</li>
+      <li>Mais uma laje superior pronta para construir</li>
+    </ul>
+    <div class="floors">
+      <div class="floor">
+        <h3>Parte inferior</h3>
+        <ul><li>3 quartos/cômodos</li><li>1 sala/cozinha</li><li>2 banheiros</li></ul>
+      </div>
+      <div class="floor">
+        <h3>Sobrado superior</h3>
+        <ul><li>4 quartos</li><li>1 sala grande</li><li>1 cozinha</li><li>1 banheiro</li></ul>
+      </div>
+    </div>
+    <p class="cta-line">Confira as fotos abaixo e agende uma visita!</p>
+  </section>
 </div>
 
 <div class="wrap">
   <nav class="rooms" id="rooms" aria-label="Ambientes"></nav>
   <main id="gallery"></main>
 
-  <div class="contact">
+  <div class="contact" id="contato">
     <h2>Gostou do imóvel?</h2>
-    <p>Entre em contato para agendar uma visita. Telefone e WhatsApp serão informados aqui.</p>
+    <p>Entre em contato para agendar uma visita ou fazer uma proposta!</p>
+    <p class="name">João Victor</p>
+    <div class="phones">
+      <div class="phone">
+        <span class="num">(62) 99652-0839</span>
+        <span class="acts">
+          <a href="https://wa.me/5562996520839?text=Ol%C3%A1%2C%20vi%20o%20an%C3%BAncio%20do%20galp%C3%A3o%20no%20Setor%20Pontakayana%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">WhatsApp</a>
+          <a class="call" href="tel:+5562996520839">Ligar</a>
+        </span>
+      </div>
+      <div class="phone">
+        <span class="num">(62) 99253-6705</span>
+        <span class="acts">
+          <a href="https://wa.me/5562992536705?text=Ol%C3%A1%2C%20vi%20o%20an%C3%BAncio%20do%20galp%C3%A3o%20no%20Setor%20Pontakayana%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">WhatsApp</a>
+          <a class="call" href="tel:+5562992536705">Ligar</a>
+        </span>
+      </div>
+    </div>
   </div>
-  <p class="note">Página de teste. Valores e contato ainda serão incluídos.</p>
 </div>
 
 <div class="viewer" id="viewer" hidden role="dialog" aria-modal="true" aria-label="Visualizador de fotos">
@@ -187,10 +259,10 @@ section.room p { margin: 0 0 14px; color: var(--muted); font-size: 15px; }
 
 <script>
 const sections = [
-  { id: "fachada", name: "Fachada", desc: "Prédio de dois pavimentos, portão amplo e janelas em vidro na frente.", from: 1, to: 3 },
-  { id: "galpao", name: "Galpão", desc: "Área livre com pé-direito alto, iluminação natural, frente em vidro e banheiro.", from: 4, to: 8 },
-  { id: "superior", name: "Pavimento superior", desc: "Salão com janelas amplas, cozinha com bancada, quartos e banheiro.", from: 9, to: 23 },
-  { id: "outros", name: "Outros ambientes", desc: "Cozinha com fogão embutido, banheiro com cuba de vidro e cômodos de apoio.", from: 24, to: 28 }
+  { id: "fachada", name: "Fachada do galpão", desc: "Galpão com duas lajes e fachada pele de vidro.", from: 1, to: 3 },
+  { id: "galpao", name: "Galpão", desc: "Recém-reformado, com iluminação natural, forro em PVC e paredes na cor branca.", from: 4, to: 8 },
+  { id: "inferior", name: "Piso inferior", desc: "Conta com 3 cômodos/quartos, 1 cozinha e 1 banheiro, tudo com forro PVC.", from: 24, to: 28 },
+  { id: "superior", name: "Piso superior", desc: "Conta com 4 quartos, 1 sala grande, 1 cozinha e 1 banheiro. Todo em porcelanato e com portas e janelas de alumínio.", from: 9, to: 23 }
 ];
 const photos = [];
 const pad = n => String(n).padStart(2, "0");
@@ -214,13 +286,12 @@ sections.forEach(s => {
     const b = document.createElement("button");
     b.type = "button"; b.dataset.open = idx;
     b.setAttribute("aria-label", `${s.name}, foto ${n - s.from + 1} de ${count}`);
-    b.innerHTML = `<img src="${pad(n)}.jpg" alt="${s.name}" loading="${n <= 6 ? "eager" : "lazy"}" decoding="async">`;
+    b.innerHTML = `<img src="${pad(n)}.jpg" alt="${s.name}" loading="${idx < 8 ? "eager" : "lazy"}" decoding="async">`;
     grid.appendChild(b);
   }
   sec.appendChild(grid);
   gallery.appendChild(sec);
 });
-document.getElementById("total").textContent = photos.length;
 
 const viewer = document.getElementById("viewer");
 const vimg = document.getElementById("vimg");
